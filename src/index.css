@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "@radix-ui/themes/styles.css";
+@import "tailwindcss";
+
+:root {
+    --primary-50: #fff5f2;
+    --primary-100: #ffe8e0;
+    --primary-200: #ffd5c7;
+    --primary-300: #ffb6a0;
+    --primary-400: #ff8a69;
+    --primary-500: #fe531d;
+    --primary-600: #ef3a0a;
+    --primary-700: #c62a06;
+    --primary-800: #a3250c;
+    --primary-900: #862311;
+
+    --secondary-50: #f7f7f6;
+    --secondary-100: #e5e4e3;
+    --secondary-200: #c9c7c5;
+    --secondary-300: #a7a4a1;
+    --secondary-400: #86827e;
+    --secondary-500: #6d6965;
+    --secondary-600: #5a5652;
+    --secondary-700: #4a4643;
+    --secondary-800: #1e1c1a;
+    --secondary-900: #121110;
+    --primary-color: #fe531d;
+    --secondary-color: #1e1c1a;
+    --background-color : #ffffff;
+    --font-montserrat : 'Montserrat', sans-serif;
+}
+
+@theme  {
+    --color-background: var(--background-color);
+    --color-primary: var(--primary-color);
+    --color-primary-50: var(--primary-50) ;
+    --color-primary-100: var(--primary-100);
+    --color-primary-200: var(--primary-200) ;
+    --color-primary-300: var(--primary-300) ;
+    --color-primary-400: var(--primary-400) ;
+    --color-primary-500: var(--primary-500) ;
+    --color-primary-600: var(--primary-600) ;
+    --color-primary-700: var(--primary-700) ;
+    --color-primary-800: var(--primary-800) ;
+    --color-primary-900: var(--primary-900) ;
+    --font-montserrat: var(--font-montserrat);
+}
+
+.radix-themes {
+    --default-font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    --heading-font-family: 'Montserrat',  sans-serif;
+    --code-font-family: 'Montserrat', 'Menlo', 'Consolas', monospace;
+    --strong-font-family: 'Montserrat', sans-serif;
+    --em-font-family: 'Montserrat', 'Times New Roman', serif;
+}
+
+@layer base {
+    *{
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+        box-sizing: border-box;
+    }
+    body{
+        @apply bg-background;
+    }
+}
