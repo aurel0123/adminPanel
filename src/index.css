@@ -62,4 +62,19 @@
     body{
         @apply bg-background;
     }
+    h1{
+        @apply text-3xl leading-8;
+    }
+}
+@layer components {
+    .logo {
+        @apply rounded-full h-24 w-24 overflow-hidden ;
+    }
+    .formLogin {
+        width: 70%;
+        display:  flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
 }
