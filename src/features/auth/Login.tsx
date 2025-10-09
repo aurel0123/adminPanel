@@ -1,9 +1,52 @@
-import Logo from '../../assets/auth/Logo_Fast_Food.jpg'
-import { Form } from "radix-ui";
-import  './styles.css';
-import {Text, Flex, Checkbox, Link, Button} from "@radix-ui/themes";
+import Logo from '@/assets/auth/Logo_Fast_Food.jpg'
+import {FormAuth} from "@/lib/validations.ts";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import { z} from "zod"
+import { Button } from "@/components/ui/button"
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import {Link} from "react-router-dom";
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
+import {useState} from "react";
+import {useUser} from "@/hooks/useUser.ts";
 
 export default  function LoginPage() {
+    const {loginUser} = useUser()
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+
+
+    const form  = useForm<z.infer<typeof FormAuth>>({
+        resolver : zodResolver(FormAuth),
+        mode : "onChange" ,
+        defaultValues : {
+            email : "" ,
+            password : ""
+        }
+    })
+    const onSubmit = async  (values : z.infer<typeof  FormAuth>)=> {
+        setError(null);
+
+        try{
+            const response = await loginUser(values)
+            if(!response.success) {
+                setError("Email ou mot de passe incorrect.")
+            }
+        }catch (error) {
+            console.error(error)
+        }finally {
+            setLoading(false);
+        }
+    }
     return (
         <div>
             <div className="flex flex-col gap-4 w-full h-full">
@@ -13,7 +56,7 @@ export default  function LoginPage() {
                     </div>
                     <div className="mt-4">
                         <div>
-                            <h2 className="font-semibold leading-6 text-3xl">Bienvenu sur votre application</h2>
+                            <h1 className="font-semibold leading-6 text-3xl">Bienvenu sur votre application</h1>
                             <p className="text-center my-2 text-gray-500 text-lg">
                                 Entrer les details pour vous connecter
                             </p>
@@ -21,72 +64,69 @@ export default  function LoginPage() {
                     </div>
                 </div>
                 <div className="formLogin">
-                    <Form.Root className="FormRoot">
-                        <Form.Field className="FormField" name="email">
-                            <div
-                                style={{
-                                    display: "flex",
-                                    alignItems: "baseline",
-                                    justifyContent: "space-between",
-                                }}
-                            >
-                                <Form.Label className="FormLabel">Email</Form.Label>
-                                <Form.Message className="FormMessage" match="valueMissing">
-                                    Please enter your email
-                                </Form.Message>
-                                <Form.Message className="FormMessage" match="typeMismatch">
-                                    Please provide a valid email
-                                </Form.Message>
-                            </div>
-                            <Form.Control asChild>
-                                <input className="Input" type="email" required placeholder="johndeo@gmail.com"/>
-                            </Form.Control>
-                        </Form.Field>
-                        <Form.Field className="FormField" name="password">
-                            <div
-                                style={{
-                                    display: "flex",
-                                    alignItems: "baseline",
-                                    justifyContent: "space-between",
-                                }}
-                            >
-                                <Form.Label className="FormLabel">Mot de passe</Form.Label>
-                                <Form.Message className="FormMessage" match="valueMissing">
-                                    Please enter a question
-                                </Form.Message>
-                            </div>
-                            <Form.Control asChild>
-                                <input className="Input"  type="password" required placeholder="********" />
-                            </Form.Control>
-                        </Form.Field>
-                        <div className="flex w-full justify-between my-4">
-                            <div>
-                                <Text as="label" size="2">
-                                    <Flex gap="2">
-                                        <Checkbox defaultChecked />
-                                        Se souvenir de moi
-                                    </Flex>
-                                </Text>
-                            </div>
-                            <div>
-                                <Link href="#" underline="always">Mot de passe oublié ?</Link>
-                            </div>
-                        </div>
-                        <Form.Submit asChild >
-                            <Flex direction="column" gap="3">
-                                <Button className="w-full" size="3">
-                                    Se connecter
-                                </Button>
-                                <Text as="span" className="text-center text-gray-400">
-                                    Vous n'aves pas votre application?
-                                    <Link href="#" underline="always">
-                                        S'inscrire
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input type="email" placeholder="m@gmail.com" {...field}
+                                                   className="rounded-sm py-2 px-4 h-10 shadow-none focus-visible:border-transparent focus-visible:ring-ring/50 focus-visible:ring-[1px]"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Mot de passe</FormLabel>
+                                        <FormControl>
+                                            <Input type="password" placeholder="********" {...field}
+                                                   className="rounded-sm py-2 px-4 h-10 shadow-none focus-visible:border-transparent focus-visible:ring-ring/50 focus-visible:ring-[1px]"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <div className="flex justify-between items-center">
+                                <div className="flex gap-1 justify-center">
+                                    <Checkbox/>
+                                    <Label>Se souvenir de moi</Label>
+                                </div>
+                                <Button variant="link" asChild>
+                                    <Link to="#" >
+                                        Mot de passe oublié ?
                                     </Link>
-                                </Text>
-                            </Flex>
-                        </Form.Submit>
-
-                    </Form.Root>
+                                </Button>
+                            </div>
+                            <Button
+                                type="submit"
+                                className={`w-full ${(!form.formState.isValid || loading) ? "bg-gray-200 text-black cursor-not-allowed" : ""}`}
+                                disabled={!form.formState.isValid || loading}
+                            >
+                                {loading ? (
+                                    <>
+                                        {/* Spinner simple en SVG */}
+                                        <svg className="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                                        </svg>
+                                        Connexion
+                                    </>
+                                ) : (
+                                    "Se connecter"
+                                )}
+                            </Button>
+                        </form>
+                    </Form>
                 </div>
             </div>
         </div>
