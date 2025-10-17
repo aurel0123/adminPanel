@@ -3,11 +3,12 @@ import bgAuth from '../assets/auth/bg-auth.png';
 import bgAuth2 from '../assets/auth/bg-auth2.png' ;
 import vector from '../assets/auth/Vector.png'
 import bgDishes from '../assets/auth/bgDishes.png';
-
+import { Toaster } from "@/components/ui/sonner"
 
 export default function AuthLayout() {
     return (
-        <div className="flex w-full h-screen gap-4">
+        <div className="flex w-full h-screen">
+            <Toaster/>
             <section className="w-1/2 h-full bg-gray-100 overflow-hidden p-2">
                 <div className="w-full h-full rounded-xl overflow-hidden bg-[#FE754A] relative">
                     <div className=" flex flex-col h-1/2 justify-center items-center px-2">
@@ -38,7 +39,7 @@ export default function AuthLayout() {
                     </div>
                 </div>
             </section>
-            <section className="w-1/2 h-full">
+            <section className="w-1/2 h-full p-2">
                 <Outlet />
             </section>
         </div>

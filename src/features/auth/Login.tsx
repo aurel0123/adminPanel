@@ -18,6 +18,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import {useState} from "react";
 import {useUser} from "@/hooks/useUser.ts";
+import { Spinner } from "@/components/ui/spinner"
+import { toast } from "sonner"
+
 
 export default  function LoginPage() {
     const {loginUser} = useUser()
@@ -40,6 +43,13 @@ export default  function LoginPage() {
             const response = await loginUser(values)
             if(!response.success) {
                 setError("Email ou mot de passe incorrect.")
+            }
+            if(error){
+                toast.error('Erreur lors de la connexion' , {
+                    description: error,
+                })
+            }else {
+                toast.success('Vous êtes connecté')
             }
         }catch (error) {
             console.error(error)
@@ -115,10 +125,7 @@ export default  function LoginPage() {
                                 {loading ? (
                                     <>
                                         {/* Spinner simple en SVG */}
-                                        <svg className="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                                        </svg>
+                                        <Spinner className="size-3"/>
                                         Connexion
                                     </>
                                 ) : (

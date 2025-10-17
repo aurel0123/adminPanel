@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const FormAuth = z.object({
-    email: z.string().email("L'email est invalide"),
+    email: z.email("L'email est invalide"),
     password: z
         .string()
         .min(12, "Le mot de passe doit contenir au moins 12 caractères")
@@ -9,4 +9,12 @@ export const FormAuth = z.object({
         .regex(/[A-Z]/, "Le mot de passe doit contenir au moins une majuscule")
         .regex(/[a-z]/, "Le mot de passe doit contenir au moins une minuscule")
         .regex(/[0-9]/, "Le mot de passe doit contenir au moins un chiffre"),
+});
+
+export const RestaurantForm = z.object({
+    nameRestaurant: z.string().min(1, "Nom requis"),
+    imageRestaurant: z.string().min(1, "Image requise"),
+    location: z.string().min(1, "Adresse requise"),
+    latitude: z.number(),
+    longitude: z.number()
 });

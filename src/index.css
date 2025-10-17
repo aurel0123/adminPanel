@@ -167,4 +167,7 @@
     .formLogin {
         @apply w-4/5 mx-auto;
     }
+    .imagekit-upload {
+        @apply flex w-full items-center gap-2 ;
+    }
 }

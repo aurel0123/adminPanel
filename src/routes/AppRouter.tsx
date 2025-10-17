@@ -4,6 +4,11 @@ import AuthLayout from "@/layouts/authLayout.tsx";
 import {AuthProvider} from "@/context/AuthProvider.tsx";
 import AdminLayout from "@/layouts/adminLayout.tsx";
 import {PrivateRoute} from "@/routes/PrivateRoute.tsx";
+import RestaurateurLayout from "@/layouts/restaurateurLayout.tsx";
+import CreateRestaurant from "@/features/restaurants/add/CreateRestaurant.tsx";
+import Categories from "@/features/categories/index";
+import DashbordRestaurateur from "@/features/dashboards/DashbordRestaurateur.tsx";
+
 
 export default function AppRouter() {
     return (
@@ -14,7 +19,7 @@ export default function AppRouter() {
                     <Route element={<AuthLayout/>}>
                         <Route path="/login" element={<LoginPage/>} />
                     </Route>
-
+                    <Route path ="/restaurateur/restaurant/add" element={<CreateRestaurant/>}/>
                     {/* Routes protégées pour admin */}
                     <Route
                         path="/admin"
@@ -34,11 +39,12 @@ export default function AppRouter() {
                         path="/restaurateur"
                         element={
                             <PrivateRoute type_user="restaurateur">
-                                <div>Restaurateur Layout</div>
+                                <RestaurateurLayout/>
                             </PrivateRoute>
                         }
                     >
-                        <Route path="tableau-de-bord" element={<div>Restaurateur Dashboard</div>} />
+                        <Route path="tableau-de-bord" element={<DashbordRestaurateur/>} />
+                        <Route path="categories" element={<Categories/>} />
                     </Route>
 
                     {/* Routes protégées pour consumer (exemple) */}

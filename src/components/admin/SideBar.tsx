@@ -8,9 +8,10 @@ import {
     SidebarRail,
 } from "@/components/ui/sidebar"
 import {TeamSwitcher} from "@/components/admin/team-switcher.tsx";
-import {navMain, team, user} from "@/constant";
+import {navMain, setting, team, user} from "@/constant";
 import {NavUser} from "@/components/admin/nav-user.tsx";
 import {NavMain} from "@/components/admin/nav-main.tsx";
+import {NavSetting} from "@/components/admin/nav-setting.tsx";
 
 
 export function SideBar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -23,6 +24,7 @@ export function SideBar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavMain items={navMain}/>
             </SidebarContent>
             <SidebarFooter>
+                <NavSetting items={setting}/>
                 <NavUser user={user}/>
             </SidebarFooter>
             <SidebarRail />

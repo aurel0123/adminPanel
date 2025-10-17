@@ -5,6 +5,9 @@ import {refreshToken} from "../lib/refreshToken.ts";
 import axiosClient from "../api/axiosClient.ts";
 import {AuthContext} from "./AuthContext";
 import type {Auth, User} from "@/types/global";
+import axios from "axios";
+import {config} from "@/lib/config.ts";
+import {getRestaurantsById} from "@/api/restaurant.api.ts";
 
 export const AuthProvider = ({children}:{children : ReactNode}) => {
     const [user , setUser] = useState<User | null>(null);
@@ -49,7 +52,7 @@ export const AuthProvider = ({children}:{children : ReactNode}) => {
                     setUser(null);
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
-
+                    localStorage.removeItem('idRestaurant');
                     // Rediriger seulement si on est sur une route protégée
                     const protectedRoutes = ['/dashboard', '/admin', '/restaurateur', '/consumer'];
                     const isProtectedRoute = protectedRoutes.some(route =>
@@ -65,7 +68,15 @@ export const AuthProvider = ({children}:{children : ReactNode}) => {
             }
 
             const response = await axiosClient.get('/api/user/user-info/');
-            setUser(response.data.user);
+            const {user , idRestaurant} = response.data;
+            if(idRestaurant){
+                localStorage.setItem('idRestaurant' , idRestaurant)
+            }
+            setUser({
+                ...user ,
+                idRestaurant : idRestaurant || null
+            })
+
         }catch (error) {
             console.error(error)
             setUser(null);
@@ -78,20 +89,20 @@ export const AuthProvider = ({children}:{children : ReactNode}) => {
     const loginUser = async (credentials : Auth) => {
         try{
             setError(null);
-            const response = await axiosClient.post('/api/auth/login/', credentials);
+            const response = await axios.post(`${config.env.apiBackend}api/auth/login/`, credentials);
 
             if(!response.data || !response.data.user){
                 throw new Error("Format de reponse invalid");
             }
 
             const {access , refresh} = response.data.tokens;
-
             if (!access || !refresh) {
                 throw new Error('Tokens manquants dans la réponse');
             }
 
             localStorage.setItem('accessToken', access);
             localStorage.setItem('refreshToken', refresh);
+
 
             await fetchUser();
 
@@ -114,11 +125,18 @@ export const AuthProvider = ({children}:{children : ReactNode}) => {
         }finally {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
+            localStorage.removeItem('idRestaurant');
             setUser(null);
             navigate('/login');
         }
     }
-
+    const getRestaurantUser = async (id :string) => {
+        const response = await getRestaurantsById(id)
+        if(!response){
+            throw new Error("Votre restaurant n'existe pas ");
+        }
+        return response;
+    }
     // Vérifier l'authentification au chargement
     useEffect(() => {
         fetchUser();
@@ -131,6 +149,7 @@ export const AuthProvider = ({children}:{children : ReactNode}) => {
         setUser,
         loginUser,
         logoutUser,
+        getRestaurantUser,
         loading,  // IMPORTANT: Exposer loading dans le contexte
         error,
         isAuthenticated: !!user

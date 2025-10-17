@@ -13,12 +13,27 @@ type User = {
     phone : string,
     type_user : "restaurateur" | "consumer" | "admin",
 }
+type Restaurant = {
+    idRestaurant?: string,
+    owner?: string,
+    owner_name? : string,
+    nameRestaurant : string,
+    imageRestaurant : string,
+    location : string,
+    latitude : number,
+    longitude : number,
+    categories?: [],
+    dishes?: [] ,
+    total_dishes?: number ,
+    total_categories?: number
+}
 
 type AuthContextType = {
     user: User | null;
     setUser: (user: User | null) => void;
     loginUser: (credentials: Auth) => Promise<{ success: boolean; error?: any }>;
     logoutUser: () => Promise<void>;
+    getRestaurantUser : (id : string) => Promise<Restaurant|null>;
     loading: boolean;
     error: any;
     isAuthenticated: boolean;
@@ -40,3 +55,19 @@ interface  Items {
         url: string
     }[]
 }
+
+type ImagekitUploadProps = {
+    folder: string;
+    onUploadSuccess?: (url: string) => void;
+    onUploadError?: (error: any) => void;
+    acceptedFileTypes?: string;
+};
+
+type RestaurantStore = {
+    idRestaurant: string | null;
+    data?: Restaurant;
+    setRestaurantId: (id: string) => void;
+    clearRestaurantId: () => void;
+    setRestaurantData: (data: Restaurant) => void;
+    clearRestaurantData?: () => void;
+};

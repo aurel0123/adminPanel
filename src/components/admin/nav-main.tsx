@@ -22,7 +22,7 @@ export function NavMain({items}: {items: Items[]}) {
     const location = useLocation()
     return (
         <SidebarGroup>
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupLabel>General</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
                     <Collapsible

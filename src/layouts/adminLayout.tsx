@@ -5,10 +5,12 @@ import {
 import {SideBar} from "@/components/admin/SideBar.tsx";
 import {Outlet} from "react-router-dom";
 import Header from "@/components/admin/header.tsx";
+import {Toaster} from "@/components/ui/sonner"
 
 export default function AdminLayout() {
     return (
         <SidebarProvider>
+            <Toaster richColors  />
             <SideBar />
             <SidebarInset>
                 <Header />

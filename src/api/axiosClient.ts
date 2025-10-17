@@ -34,19 +34,26 @@ axiosClient.interceptors.response.use(
             || window.location.pathname.startsWith('/restaurateur')
             || window.location.pathname.startsWith('/consumer');
 
-        if(error.response?.status === 401 || !originalRequest._retry && !originalRequest.url.includes('api/token/refresh/')){
+        if(
+            error.response?.status === 401 &&
+            !originalRequest._retry &&
+            !originalRequest.url.includes('api/token/refresh/')
+        ){
             originalRequest._retry  = true;
             try{
                 const newAccessToken = await refreshToken()
                 originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
-                return axios(originalRequest)
+                return axiosClient(originalRequest)
             }catch(refreshError) {
-                if(isPrivateRoute) {
-                    localStorage.removeItem('accessToken');
-                    localStorage.removeItem('refreshToken');
+                console.error('Refresh token failed:', refreshError);
+
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+
+                if (isPrivateRoute) {
                     window.location.href = '/login';
                 }
-                return Promise.reject(refreshError)
+                return Promise.reject(refreshError);
             }
         }
         return Promise.reject(error)

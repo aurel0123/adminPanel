@@ -1,4 +1,17 @@
-import {Users, LayoutDashboard, Cog, GalleryVerticalEnd, SquareTerminal , Layers , Banknote} from "lucide-react";
+import {
+    Users,
+    LayoutDashboard,
+    Cog,
+    GalleryVerticalEnd,
+    Layers,
+    Banknote,
+    Info,
+    Bookmark,
+    ShoppingCart,
+    UsersRound,
+    Utensils,
+    ChartPie
+} from "lucide-react";
 
 export const navMain = [
     {
@@ -20,37 +33,88 @@ export const navMain = [
         title: 'Utilisateurs',
         icon : Users ,
         url : "/admin/users",
-    },
+    }
+]
+export const setting = [
     {
         title: 'Paramètres',
         icon : Cog ,
-        url : "/admin/settings"
-    },
-    {
-        title: "Playground",
-        icon: SquareTerminal,
-        isActive: true,
+        isActive: false,
         items: [
             {
-                title: "History",
-                url: "/admin/history",
+                title: "Profile",
+                url: "/admin/profile",
             },
             {
-                title: "Starred",
+                title: "Compte",
                 url: "#",
             },
             {
-                title: "Settings",
+                title: "Apparance",
+                url: "#",
+            },
+            {
+                title: "Notification",
+                url: "#",
+            },
+            {
+                title: "Affichage",
                 url: "#",
             },
         ],
     },
+    {
+        title: 'Aide & Support',
+        icon : Info,
+        url : "/admin/help",
+    }
 ]
-
+export const navRestaurateur = [
+    {
+        title: 'Tableau de bord',
+        icon : LayoutDashboard ,
+        url : "/restaurateur/tableau-de-bord"
+    },
+    {
+        title: 'Reservations',
+        icon : Bookmark ,
+        url : '/restaurateur/reservations'
+    },
+    {
+        title: 'Commandes',
+        icon : ShoppingCart ,
+        url : '/restaurateur/commandes'
+    },
+    {
+        title: 'Categories',
+        icon : Layers ,
+        url : '/restaurateur/categories'
+    },
+    {
+        title: 'Clients',
+        icon : UsersRound ,
+        url : '/restaurateur/clients'
+    },
+    {
+        title: 'Menu',
+        icon : Utensils ,
+        url : '/restaurateur/commandes'
+    },
+    {
+        title: 'Avis',
+        icon : ChartPie ,
+        url : '/restaurateur/commandes'
+    },
+]
 export const team = {
     name: "Acme Inc",
     logo: GalleryVerticalEnd,
     plan: "Administrateur",
+};
+export const teamRestaurateur = {
+    name: "Acme Inc",
+    logo: GalleryVerticalEnd,
+    plan: "Restaurateur",
 };
 
 export const user = {
