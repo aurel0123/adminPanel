@@ -1,4 +1,3 @@
-import {Toaster} from "sonner";
 import CategoriesPrimaryButtons from "@/features/categories/components/categories-primary-buttons.tsx";
 import DataTable from "@/features/categories/components/data-table.tsx";
 import {CategoriesDialogs} from "@/features/categories/components/categories-dialogs.tsx";
@@ -9,7 +8,6 @@ export default function Categories() {
 
     return (
         <>
-            <Toaster />
             <div>
                 <div className='flex justify-between'>
                     <div>

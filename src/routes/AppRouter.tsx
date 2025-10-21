@@ -7,6 +7,7 @@ import {PrivateRoute} from "@/routes/PrivateRoute.tsx";
 import RestaurateurLayout from "@/layouts/restaurateurLayout.tsx";
 import CreateRestaurant from "@/features/restaurants/add/CreateRestaurant.tsx";
 import Categories from "@/features/categories/index";
+import Dishes from "@/features/dishes/index"
 import DashbordRestaurateur from "@/features/dashboards/DashbordRestaurateur.tsx";
 
 
@@ -45,6 +46,7 @@ export default function AppRouter() {
                     >
                         <Route path="tableau-de-bord" element={<DashbordRestaurateur/>} />
                         <Route path="categories" element={<Categories/>} />
+                        <Route path="plats" element={<Dishes/>} />
                     </Route>
 
                     {/* Routes protégées pour consumer (exemple) */}

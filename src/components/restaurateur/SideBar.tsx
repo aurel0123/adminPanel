@@ -7,11 +7,11 @@ import {
     SidebarHeader,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import {TeamSwitcher} from "@/components/admin/team-switcher.tsx";
+import {TeamSwitcher} from "@/components/restaurateur/team-switcher.tsx";
 import {navRestaurateur, setting, teamRestaurateur, user} from "@/constant";
-import {NavUser} from "@/components/admin/nav-user.tsx";
-import {NavMain} from "@/components/admin/nav-main.tsx";
-import {NavSetting} from "@/components/admin/nav-setting.tsx";
+import {NavUser} from "@/components/restaurateur/nav-user.tsx";
+import {NavMain} from "@/components/restaurateur/nav-main.tsx";
+import {NavSetting} from "@/components/restaurateur/nav-setting.tsx";
 import {NavBoutton} from "@/components/restaurateur/nav-boutton.tsx";
 
 

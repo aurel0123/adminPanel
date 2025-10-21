@@ -18,3 +18,13 @@ export const RestaurantForm = z.object({
     latitude: z.number(),
     longitude: z.number()
 });
+
+export const DishSchema = z.object({
+    nameDish : z.string("Veuillez saisir le nom du menu "),
+    restaurant : z.string().optional(),
+    category: z.string().optional(),
+    price : z.number(),
+    imageDish : z.string(),
+    description : z.string().optional(),
+    specificity : z.string().optional(),
+})

@@ -5,11 +5,13 @@ import {
 import {SideBar} from "@/components/restaurateur/SideBar.tsx";
 import {Outlet} from "react-router-dom";
 import Header from "@/components/restaurateur/header.tsx";
+import {Toaster} from "@/components/ui/sonner.tsx";
 
 
 export default function RestaurateurLayout() {
     return (
         <SidebarProvider>
+            <Toaster richColors  expand={true} />
             <SideBar />
             <SidebarInset>
                 <Header />

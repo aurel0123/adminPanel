@@ -49,3 +49,40 @@ export const updateRestaurant = async (data:updateCategoryData , id :string | un
         throw new Error ('Error lors de la modification')
     }
 }
+
+export const TryCategorie = async () => {
+    try {
+        const response = await getCategorie();
+        if(response){
+            const data: Categorie[] = response.results
+            const CategoriesName: string[] = data.map((cat) => cat.name)
+            return ["Tout", ...CategoriesName]
+        }else {
+            console.log("Tableau vide")
+        }
+    } catch(e){
+        console.error(e);
+    }
+}
+export const MyRestaurantCategories = async () => {
+    try{
+        const restaurant_id = localStorage.getItem('idRestaurant');
+        if(restaurant_id) {
+            const response = await axiosClient.get(`api/restaurants/${restaurant_id}/categories/my/`);
+            if(response.status == 200) {
+                const data = response.data;
+                const CategoriesName = data.categories.map((cat: Categorie) => cat.name);
+                const uniqueCategoryNames = ["Tout", ...CategoriesName];
+               return {
+                    success: true,
+                    data: uniqueCategoryNames,
+                }
+            }else {
+                throw  new  Error("Erreur lors dela récupération des catégories")
+            }
+        }
+    }catch (e) {
+        console.error(e)
+    }
+
+}

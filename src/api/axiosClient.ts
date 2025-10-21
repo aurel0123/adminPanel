@@ -9,7 +9,7 @@ const axiosClient: AxiosInstance = axios.create({
         "Content-Type": "application/json",
         Accept: "application/json",
     },
-    timeout: 10000, // 10 secondes max pour une requête
+   /*  timeout: 10000 */ // 10 secondes max pour une requête
 })
 
 // Intercepteur pour ajouter le token aux requêtes

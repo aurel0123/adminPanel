@@ -27,17 +27,17 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar"
-
-export function NavUser({
-                            user,
-                        }: {
-    user: {
-        name: string
-        email: string
-        avatar: string
-    }
-}) {
+import { useUser } from "@/hooks/useUser"
+interface User {
+    name: string
+    email: string
+    avatar: string
+}
+export function NavUser({user}: { user: User } ) {
     const { isMobile } = useSidebar()
+
+    const {logoutUser}  = useUser(); 
+
 
     return (
         <SidebarMenu>
@@ -89,9 +89,9 @@ export function NavUser({
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <LogOut />
-                            Log out
+                        <DropdownMenuItem onClick={logoutUser} className="bg-destructive text-white">
+                            <LogOut className="text-white" />
+                            Déconnexion
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

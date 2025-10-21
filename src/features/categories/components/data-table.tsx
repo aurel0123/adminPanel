@@ -73,7 +73,6 @@ export default function DataTable({results }: DataTableProps) {
                     }
                     className="max-w-sm"
                 />
-
                 <DropDown table={table} />
             </div>
             <div className='overflow-hidden rounded-md border mt-4'>

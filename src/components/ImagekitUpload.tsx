@@ -21,7 +21,7 @@ export default function ImagekitUpload({folder, acceptedFileTypes = "image/*", o
 
     const authenticator = async () => {
         try {
-            const response = await axios.get(`${config.env.apiBackend}/api/auth/imagekit/`);
+            const response = await axios.get(`${config.env.apiBackend}api/auth/imagekit/`);
             if (response.status !== 200) {
                 const errorText = JSON.stringify(response.data);
                 throw new Error(`Request failed with status ${response.status}: ${errorText}`);

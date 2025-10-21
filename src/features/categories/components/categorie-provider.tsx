@@ -47,7 +47,7 @@ export const useCategories = () => {
     const categoriesContext = React.useContext(CategoriesContext)
 
     if (!categoriesContext) {
-        throw new Error('useTasks has to be used within <CategoriesContext>')
+        throw new Error('useCategories has to be used within <CategoriesContext>')
     }
 
     return categoriesContext

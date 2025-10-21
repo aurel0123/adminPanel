@@ -71,3 +71,24 @@ type RestaurantStore = {
     setRestaurantData: (data: Restaurant) => void;
     clearRestaurantData?: () => void;
 };
+
+type Categorie  ={
+    idCategory?: string;
+    restaurant?: string;
+    restaurant_name?: string;
+    name: string;
+    restaurant?: string;
+    description?: string;
+}
+
+type Dishe = {
+    idDish?: string
+    nameDish: string,
+    restaurant?: string,
+    category?: string,
+    category_name?: string,
+    price: number,
+    imageDish: string,
+    description?: string,
+    specificity?:string
+}

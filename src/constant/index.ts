@@ -96,9 +96,9 @@ export const navRestaurateur = [
         url : '/restaurateur/clients'
     },
     {
-        title: 'Menu',
+        title: 'Plats',
         icon : Utensils ,
-        url : '/restaurateur/commandes'
+        url : '/restaurateur/plats'
     },
     {
         title: 'Avis',
